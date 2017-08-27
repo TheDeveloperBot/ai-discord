@@ -18,6 +18,7 @@
   "homepage": "https://github.com/meldsza/cleverbot.io-discord#readme",
   "dependencies": {
     "discord.js": "^11.1.0",
+    "request": "^2.81.0",
     "request-promise-native": "^1.0.4"
   }
 }
