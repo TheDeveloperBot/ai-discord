@@ -12,7 +12,7 @@ bot.on("ready", () => {
 bot.on("message", async function (message) {
     if (settings.channels.includes(message.channel.id) && message.author.id != bot.user.id) {
         console.log(message.author.tag + " : " + message.cleanContent);
-        let response = await pandorabot(message.cleanContent);
+        let response = await pandorabot(message.cleanContent, message.author.tag);
         console.log("me : " + response);
         message.channel.send(response);
     }
