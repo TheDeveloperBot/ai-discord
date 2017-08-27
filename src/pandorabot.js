@@ -4,8 +4,8 @@ let sessionid = false;
 const bot_url = settings.bot_url || "https://playground.pandorabots.com/talk/meldsza/cleverbot?user_key=";
 module.exports = async function (question, client_name) {
     let formdata = {
-        input: question,
-        client_name: client_name
+        input: question
+        //client_name: client_name
     };
     if (sessionid) {
         formdata.sessionid = sessionid
