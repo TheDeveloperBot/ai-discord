@@ -11,6 +11,8 @@ bot.on("ready", () => {
 
 bot.on("message", async function (message) {
     if (settings.channels.includes(message.channel.id) && message.author.id != bot.user.id) {
+        if (message.content.includes("!reset") && message.member.roles.has(settings.adminRole))
+            await pandorabot(message.cleanContent, message.author.username, true);
         console.log(message.author.tag + " : " + message.cleanContent);
         let response = await pandorabot(message.cleanContent, message.author.username);
         console.log("me : " + response);
