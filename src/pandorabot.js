@@ -1,28 +1,25 @@
 const request = require('request-promise-native');
-const key = settings.pandora_key || process.env.PANDORA_KEY;
-let sessionid = false;
-const bot_url = settings.bot_url || "https://playground.pandorabots.com/talk/meldsza/cleverbot?user_key=";
-module.exports = async function (question, client_name, reset) {
+const xml = require('./xml2js');
+let sessionids = {};
+const bot_url = settings.bot_url || "https://www.pandorabots.com/pandora/talk-xml?botid=a49104941e378378";
+const querystring = require('querystring');
+module.exports = async function (question, client_name) {
     let formdata = {
         input: question
-        //client_name: client_name
     };
-    if (sessionid) {
-        formdata.sessionid = sessionid
-        formdata.recent = true;
+    if (sessionids[client_name]) {
+        formdata.custid = sessionids[client_name];
     }
-    if (reset)
-        formdata = { reset: true };
+    else {
+        formdata.input = "My name is " + client_name + ". " + formdata.input
+    }
     let res = await request({
-        method: "POST",
-        uri: bot_url + key,
-        form: formdata
+        method: "GET",
+        uri: bot_url + "?" + querystring.stringify(formdata)
     })
     console.log(res);
-    res = JSON.parse(res);
-    sessionid = res.sessionid;
-    if (res.status === "ok")
-        return res.responses[0];
-    else
-        return "Sorry, i could not understand that";
+    res = xml(res);
+    res = res.result
+    sessionids[client_name] = res["$"].custid;
+    return res.that[0];
 }
