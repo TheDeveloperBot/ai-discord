@@ -16,7 +16,7 @@ module.exports = async function (question, client_name) {
     let res = await request(bot_url + querystring.stringify(formdata))
     console.log(res);
     res = xml(res);
-    console.dir(res);
+    console.log(res);
     res = res.result;
     sessionids[client_name] = res.$.custid;
     return res.that[0];
