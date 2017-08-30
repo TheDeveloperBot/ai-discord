@@ -1,7 +1,7 @@
 const request = require('request-promise-native');
 const xml = require('./xml2js');
 let sessionids = {};
-const bot_url = settings.bot_url || "https://www.pandorabots.com/pandora/talk-xml?botid=a49104941e378378";
+const bot_url = settings.bot_url || "https://www.pandorabots.com/pandora/talk-xml?botid=a49104941e378378&";
 const querystring = require('querystring');
 module.exports = async function (question, client_name) {
     let formdata = {
@@ -13,10 +13,7 @@ module.exports = async function (question, client_name) {
     else {
         formdata.input = "My name is " + client_name + ". " + formdata.input
     }
-    let res = await request({
-        method: "GET",
-        uri: bot_url + "?" + querystring.stringify(formdata)
-    })
+    let res = await request(bot_url + querystring.stringify(formdata))
     console.log(res);
     res = xml(res);
     res = res.result
