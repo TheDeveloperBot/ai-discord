@@ -1,7 +1,7 @@
 const request = require('request-promise-native');
 const xml = require('./xml2js');
 try {
-    let sessionids = require('./sessions.json');
+    let sessionids = require('../sessions.json');
 }
 catch (e) {
     sessionids = {};
