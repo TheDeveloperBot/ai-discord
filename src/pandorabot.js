@@ -17,7 +17,7 @@ module.exports = async function (question, client_name) {
     console.log(res);
     res = await xml(res);
     console.log(res);
-    res = res.result.replace(/<br>/g, "\n");
+    res = res.result;
     sessionids[client_name] = res.$.custid;
-    return res.that[0];
+    return res.that[0].replace(/<br>/g, "\n");
 }
