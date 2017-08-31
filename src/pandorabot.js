@@ -1,10 +1,10 @@
 const request = require('request-promise-native');
 const xml = require('./xml2js');
+let sessionids = {}
 try {
     let sessionids = require('../sessions.json');
 }
 catch (e) {
-    sessionids = {};
 }
 const bot_url = settings.bot_url || "https://www.pandorabots.com/pandora/talk-xml?botid=a49104941e378378&";
 const querystring = require('querystring');
