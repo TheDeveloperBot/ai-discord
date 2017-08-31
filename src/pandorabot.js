@@ -10,11 +10,11 @@ catch (e) {
 const bot_url = settings.bot_url || "https://www.pandorabots.com/pandora/talk-xml?botid=a49104941e378378&";
 const querystring = require('querystring');
 const fs = require('fs');
-module.exports = async function (question, client_name) {
+module.exports = async function (question, client_name, reset) {
     let formdata = {
         input: question
     };
-    if (sessionids[client_name]) {
+    if (sessionids[client_name] && !reset) {
         formdata.custid = sessionids[client_name];
     }
     else {
