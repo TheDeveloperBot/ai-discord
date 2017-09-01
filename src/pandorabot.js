@@ -26,7 +26,8 @@ module.exports = async function (question, client_name, reset) {
     res = await xml(res);
     console.log(res);
     res = res.result;
-    sessionids[client_name] = res.$.custid;
+    if (!sessionids[client_name] || reset)
+        sessionids[client_name] = res.$.custid;
     return res.that[0].replace(/<br>/g, "\n");
 }
 function saveSession() {
